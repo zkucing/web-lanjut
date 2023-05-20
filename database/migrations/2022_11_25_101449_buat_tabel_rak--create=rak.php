@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('rak', function (Blueprint $table) {
             $table->id();
-            $table->string("id_rak");
+            $table->string("id");
             $table->string("nama_rak");
             $table->string("id_buku");
             $table->timestamps();

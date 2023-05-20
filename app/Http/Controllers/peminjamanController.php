@@ -1,58 +1,35 @@
 <?php
-
+ 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use App\Models\peminjaman;
-
-class peminjamanController extends Controller
+ 
+class PeminjamanController extends Controller
 {
-    public function buat()
+    public function lihat()
     {
-        return view("peminjaman.form-input");
+    	// mengambil data dari table tb_peminjaman
+    	$db_peminjaman = DB::table('tb_peminjaman')->get();
+    	// mengirim data ke view index
+    	return view('lihat-peminjaman',['tb_peminjaman' => $db_peminjaman]);
+    }
+
+    public function input()
+    {
+		// memanggil view input
+		return view('input-peminjaman');
     }
 
     public function simpan(Request $request)
     {
-        $peminjaman = new peminjaman();
-        $peminjaman->nama = $request->get("nama");
-        $peminjaman->keterangan = $request->get("keterangan");
-        $peminjaman->save();
+		$db_peminjaman = new tb_peminjaman();
+        $db_peminjaman->nama_siswa = $request->post("nama_siswa");
+        $db_peminjaman->kelas_siswa = $request->post("kelas_siswa");
+        $db_peminjaman->nomor_hp = $request->post("nomor_hp");
+		$db_peminjaman->judul_buku = $request->post("judul_buku");
+        $db_peminjaman->tanggal_peminjaman = $request->post("tanggal_peminjaman");
+		$db_peminjaman->save();
 
-        return redirect(route("tampil_peminjaman", ['id' => $peminjaman->id]));
-    }
-
-    public function tampil($id)
-    {
-        $peminjaman = peminjaman::find($id);
-
-        return view("peminjaman.tampil")->with("peminjaman", $peminjaman);
-    }
-
-    public function semua()
-    {
-        $data = peminjaman::all();
-        return view("peminjaman.semua")->with("data", $data);
-    }
-
-    public function ubah($id)
-    {
-        return view("peminjaman.form-edit")->with("id", $id);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $peminjaman = peminjaman::find($id);
-        $peminjaman->nama = $request->get("nama");
-        $peminjaman->keterangan = $request->get("keterangan");
-        $peminjaman->save();
-
-        return redirect(route("tampil_peminjaman", ['id' => $peminjaman->id]));
-    }
-
-    public function hapus($id)
-    {
-        peminjaman::destroy($id);
-        return redirect(route('semua_peminjaman'));
+        return redirect(route("lihat-peminjaman"));
     }
 }
