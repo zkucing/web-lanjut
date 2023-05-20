@@ -58,18 +58,6 @@
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
-            <li class="nav-item">
-                <a class="nav-link">
-                    <center><span>Input Pengembalian</span></center>
-                </a>
-            </li>
-            {{-- <li class="nav-item">
-                <a class="nav-link" href="{{route('login')}}">
-                    <span>Log Out</span></a>
-            </li> --}}
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
 
 

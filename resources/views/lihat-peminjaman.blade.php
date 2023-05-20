@@ -1,9 +1,17 @@
 @extends('blank')
 @section('konten')
+
+
 </br>
+<center>
+    <h1>Semua Buku yang Sedang Dipinjam</h1>
+</center>
+</br>
+Halaman : {{ $tb_peminjaman->currentPage() }} <br/>
+Jumlah Data : {{ $tb_peminjaman->total() }} <br/>
     <center>
         <table class="table">
-            <h1>Semua Buku yang Sedang Dipinjam</h1>
+            
         </br>
             <thead>
                 <tr>
@@ -26,12 +34,14 @@
                     <td>{{ $p->judul_buku }}</td>
                     <td>{{ $p->tanggal_peminjaman }}</td>
                     <td>
-                        <a href="/blog/sedangdipinjam/hapus/{{ $p->id }}">Edit  |</a>
-                        <a href="/blog/sedangdipinjam/hapus/{{ $p->id }}">Hapus</a> 
+                        <a href="/lihat-peminjaman/edit/{{ $p->id }}">Edit  |</a>
+                        <a href="/lihat-peminjaman/hapus/{{ $p->id }}">Hapus</a> 
                     </td>
                 </tr>
                 @endforeach
             </tbody>    
         </table>
-    </center>    
+        <br/>
+        {{ $tb_peminjaman->links('pagination::simple-bootstrap-4') }}
+    </center>   
 @endsection
